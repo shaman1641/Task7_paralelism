@@ -33,9 +33,14 @@ int main(int argc, char const *argv[]) {
         ("accuracy",opt::value<double>()->default_value(1e-6),"точность")
         ("cellsCount",opt::value<int>()->default_value(256),"размер матрицы")
         ("iterCount",opt::value<int>()->default_value(1000000),"количество операций")
+        ("help","помощь")
     ;
     opt::variables_map vm;
     opt::store(opt::parse_command_line(argc, argv, desc), vm);
+    if (vm.count("help")) {
+        std::cout << desc << "\n";
+        return 1;
+    }
     opt::notify(vm);
     int N = vm["cellsCount"].as<int>();
     double accuracy = vm["accuracy"].as<double>();
